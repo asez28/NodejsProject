@@ -21,7 +21,7 @@ export const authRequired = (req, res, next) => {
         // Rutas que requieren roles específicos
         const routesWithRoles = {
             "/api/users": ["admin"],
-            "/api/task": ["Pro", "admin"],
+            "/api/task": ["Pro", "Admin"],
         };
 
         const allowedRoles = routesWithRoles[req.originalUrl] || [];

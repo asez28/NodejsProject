@@ -8,7 +8,7 @@ export const getTasks = async (req, res) => {
 };
 
 export const createTask = async (req, res) => {
-  if (!["Pro"].includes(req.user.rol)) {
+  if (!["Pro", "Admin"].includes(req.user.rol)) {
     return res
       .status(403)
       .json({
@@ -44,7 +44,7 @@ export const getTask = async (req, res) => {
 };
 
 export const updateTask = async (req, res) => {
-  if (!["Pro"].includes(req.user.rol)) {
+  if (!["Pro", "Admin"].includes(req.user.rol)) {
     return res
       .status(403)
       .json({ message: "you don have permision to update this task" });
@@ -58,7 +58,7 @@ export const updateTask = async (req, res) => {
 };
 
 export const deleteTask = async (req, res) => {
-  if (!["Pro"].includes(req.user.rol)) {
+  if (!["Pro", "Admin"].includes(req.user.rol)) {
     return res
       .status(403)
       .json({ message: "you dont have permission to delete this task" });

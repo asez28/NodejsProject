@@ -45,6 +45,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   
+ const logout = async () => {
+  Cookies.remove("token");
+  setIsAuthenticated(false);
+  setUser(null)
+ }
+
   const hasPermission = (requiredRoles) => {
     if (!user || !requiredRoles.includes(user.rol)) {
       return false;
@@ -97,6 +103,7 @@ export const AuthProvider = ({ children }) => {
       value={{
         signup,
         signin,
+        logout,
         loading,
         user,
         isAuthenticated,

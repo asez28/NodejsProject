@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function LoginPage() {
   const {
@@ -8,11 +9,16 @@ function LoginPage() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { signin, errors: signinErrors } = useAuth();
+  const { signin, errors: signinErrors, isAuthenticated } = useAuth();
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
     signin(data);
   });
+
+  useEffect(() => {
+    if (isAuthenticated) navigate("/tasks");
+  }, [isAuthenticated]);
 
   return (
     <div className="flex h-screen items-center justify-center">
@@ -29,7 +35,7 @@ function LoginPage() {
           <h1 className="text-2xl font-bold mb-4">Login to Create!</h1>
           {errors.email && <p className="text-red-500">Email is required</p>}
           <input
-            className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
+            className="w-full bg-shahor text-white px-4 py-2 rounded-md my-2"
             placeholder="Email"
             type="text"
             {...register("email", { required: true })}
@@ -38,7 +44,7 @@ function LoginPage() {
             <p className="text-red-500">Password is required</p>
           )}
           <input
-            className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
+            className="w-full bg-shahor text-white px-4 py-2 rounded-md my-2"
             placeholder="Password"
             type="password"
             {...register("password", { required: true })}

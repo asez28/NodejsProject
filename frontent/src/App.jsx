@@ -7,35 +7,68 @@ import TasksPage from "./pages/TasksPage";
 import TaskFormPage from "./pages/TaskFormPage";
 import UserPage from "./pages/UsersPage";
 import ProfilePage from "./pages/ProfilePage";
+import UpdateRol from "./pages/UpdateRol";
 import ProtectedRoutes from "../ProtectedRoutes";
+import { TasksProvider } from "./context/TasksContext";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+      <TasksProvider>
+        <BrowserRouter>
+        <Navbar />
+        <main className="container mx-auto px-10">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-          {/* Rutas protegidas para el rol 'admin' */}
-          <Route path="/admin/*" element={<ProtectedRoutes roles={['admin']} />}>
-            <Route path="users" element={<UserPage />} />
-          </Route>
+            <Route
+              path="/users/*"
+              element={<ProtectedRoutes roles={["Admin"]} />}
+            >
+              <Route index element={<UserPage />} />
+            </Route>
 
-          {/* Rutas protegidas para roles 'Pro', 'admin', 'Lite' */}
-          <Route path="/all/*" element={<ProtectedRoutes roles={['Pro', 'admin', 'Lite']} />}>
-            <Route path="profile" element={<ProfilePage />} />
-          </Route>
+            <Route
+              path="/profile/*"
+              element={<ProtectedRoutes roles={["Pro", "Admin", "Lite"]} />}
+            >
+              <Route index element={<ProfilePage />} />
+            </Route>
 
-          {/* Rutas protegidas para roles 'Pro', 'admin' */}
-          <Route path="/pro/*" element={<ProtectedRoutes roles={['Pro', 'admin']} />}>
-            <Route path="tasks" element={<TasksPage />} />
-            <Route path="add-task" element={<TaskFormPage />} />
-            <Route path="tasks/:id" element={<TaskFormPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route
+              path="/tasks/*"
+              element={<ProtectedRoutes roles={["Pro", "Admin"]} />}
+            >
+              <Route index element={<TasksPage />} />
+            </Route>
+
+            <Route
+              path="/add-task/*"
+              element={<ProtectedRoutes roles={["Pro", "Admin"]} />}
+            >
+              <Route index element={<TaskFormPage />} />
+            </Route>
+
+            <Route
+              path="/tasks/:id"
+              element={<ProtectedRoutes roles={["Pro", "admin"]} />}
+            >
+              <Route index element={<TaskFormPage />} />
+            </Route>
+
+            <Route
+              path="/upgrade"
+              element={<ProtectedRoutes roles={["Lite"]} />}
+            >
+              <Route index element={<UpdateRol />} />
+            </Route>
+          </Routes>
+          </main>
+        </BrowserRouter>
+      </TasksProvider>
     </AuthProvider>
   );
 }

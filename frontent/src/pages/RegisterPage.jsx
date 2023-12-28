@@ -36,14 +36,14 @@ function RegisterPage() {
           <p className="text-red-500">Username is required</p>
         )}
         <input
-          className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
+          className="w-full bg-shahor text-white px-4 py-2 rounded-md my-2"
           placeholder="Username"
           type="text"
           {...register("username", { required: true })}
         />
         {errors.email && <p className="text-red-500">Email is required</p>}
         <input
-          className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
+          className="w-full bg-shahor text-white px-4 py-2 rounded-md my-2"
           placeholder="Email"
           type="email"
           {...register("email", { required: true })}
@@ -52,7 +52,7 @@ function RegisterPage() {
           <p className="text-red-500">Password is required</p>
         )}
         <input
-          className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
+          className="w-full bg-shahor text-white px-4 py-2 rounded-md my-2"
           placeholder="Password"
           type="password"
           {...register("password", { required: true })}
@@ -60,7 +60,7 @@ function RegisterPage() {
         <div>
           <label htmlFor="rol">Select your role:</label>
           <select
-            className="w-full bg-zinc-600 text-white px-4 py-2 rounded-md my-2"
+            className="w-full bg-shahor text-white px-4 py-2 rounded-md my-2"
             id="rol"
             {...register("rol", { required: true })}
           >

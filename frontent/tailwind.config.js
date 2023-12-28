@@ -3,10 +3,19 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    'node_modules/flowbite-react/lib/esm/**/*.js'
   ],
   theme: {
-    extend: {},
+    colors: {
+      'cahol': '#083344',
+      'shahor': '#52525b',
+      'shahor2': '#27272a',
+      "cahol1": "#38bdf8",
+      "lavan": "#cbd5e1"
+    }
   },
-  plugins: [],
+  plugins: [
+    require('flowbite/plugin')
+  ],
 }
 
